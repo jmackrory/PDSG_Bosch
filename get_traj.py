@@ -1,8 +1,8 @@
 import pandas as pd
 import numpy as np
 
-def get_all_trajs(df,pattern='S([0-9]+)'):
-    """get_all_trajs(df)
+def get_all_traj(df,pattern='S([0-9]+)'):
+    """get_all_traj(df)
     Get station numbers to mark which columns are for which station
     Input: df - pandas dataframe
     """
@@ -58,8 +58,8 @@ def get_row_traj(row,stat_id):
     return i0
 
 
-def get_unique_trajs(ind):
-    """get_unique_trajs
+def get_unique_traj(ind):
+    """get_unique_traj
     Build up list of unique trajectories through the system, and their count.
     Input: ind - list of each rows trajectory through the system.
     Output traj_list - list of unique trajectories
@@ -74,7 +74,6 @@ def get_unique_trajs(ind):
             i=traj_list.index(ar)
             traj_count[i]+=1
         except:
-            print('adding_new traj')
             traj_list.append(ar)
             traj_count.append(1)
     return traj_list, traj_count
@@ -83,11 +82,11 @@ def get_all_unique_traj(df):
     """actually computes all trajectories through system,
     and their counts"""
     #For all features - agrees with Borthwick
-    ind=get_station_traj(df,pattern='F([0-9]+)')
+    ind=get_all_traj(df,pattern='F([0-9]+)')
     traj_list,traj_count=get_unique_traj(ind)
     print(len(traj_list))
     #For all stations - does not agree with Borthwick, Gott
-    ind=get_station_traj(df,pattern='S([0-9]+)')
+    ind=get_all_traj(df,pattern='S([0-9]+)')
     traj_list,traj_count=get_unique_traj(ind)
     print(len(traj_list))
     
